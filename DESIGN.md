@@ -42,7 +42,11 @@ No drop shadows, box shadows, or glass panels on the site. Depth comes from the 
 
 ## 8. Responsive behavior
 
-The hero art sits behind the copy's far edge at desktop and above the copy on mobile. Image position protects the face and halo first. The reading order stays heading → explanation → action. The workflow image becomes a shorter editorial crop at narrow widths. Navigation and calls to action remain usable down to 320 CSS px.
+The hero art sits behind the copy's far edge on desktop and tablet, and above the copy on portrait phones. Tablet copy has its own narrower measure and a darker edge fade. Short landscape screens keep the art to the side so the primary action stays near the top. The reading order stays heading → explanation → action; the workflow figure uses a shorter crop on phones.
+
+The viewport fills the display without restricting zoom. The top bar, skip link, menu, content gutters, anchor offsets, and footer account for the relevant physical safe-area insets; decorative backgrounds still reach the edge. Navigation and calls to action remain usable down to 320 CSS px.
+
+Sharing uses an absolute canonical URL and a common 1200 × 630 JPEG for Open Graph and X cards. The iOS Home Screen icon uses the same crescent as the site favicon.
 
 ## 9. Accessibility constraints and gap ledger
 
@@ -56,7 +60,9 @@ The hero art sits behind the copy's far edge at desktop and above the copy on mo
 | Contrast (1.4.3, 1.4.11) | Partial | Axe reported no violations; its gradient-backed hero metadata requires manual contrast measurement. |
 | Visible and unobscured focus (2.4.7, 2.4.11), keyboard (2.1.1, 2.1.2) | Pass for checked paths | Chromium: section links move focus, Escape closes the mobile menu and restores focus, and the accordion opens with Enter. |
 | Target size (2.5.8) | Pass for checked controls | Visible desktop controls measured at least 44px high; the mobile menu and accordion were exercised at narrow widths. |
-| Reflow and text spacing (1.4.10, 1.4.12) | Pass for checked sizes | No horizontal overflow at 1440, 390, or 320 CSS px, including 320px with text-spacing overrides. |
+| Reflow and text spacing (1.4.10, 1.4.12) | Pass for checked sizes | No horizontal overflow at 1440, 1024, 768, 390, or 320 CSS px, including 320px with text-spacing overrides. |
 | Dragging, authentication, help, redundant entry (2.5.7, 3.3.8, 3.2.6, 3.3.7) | N/A | This landing page contains no drag interfaces, authentication, repeated help mechanism, or input flows. |
 
 Under reduced motion, the hero is immediately static. If the workflow module fails to load, the four numbered steps remain readable and the inactive accordion stays hidden.
+
+Chromium safe-area emulation also covered 393 × 852 portrait (59px top, 34px bottom) and 667 × 375 landscape (50px left, 20px right, 21px bottom). The checks measured the frame, header, footer, skip link, landscape menu, and visibility of both primary actions. This is browser emulation, not a test on physical iOS hardware.
