@@ -1,0 +1,172 @@
+---
+import { Image, getImage } from "astro:assets";
+import { ArrowDownIcon as ArrowDown, ArrowUpRightIcon as ArrowUpRight, GithubLogoIcon as GithubLogo, PlusIcon as Plus } from "@phosphor-icons/react/ssr";
+import cover from "../../images/01.png";
+import processArt from "../../images/02.png";
+import closeup from "../../images/03.png";
+import { ActionLink } from "../components/ActionLink";
+import { Brand } from "../components/Brand";
+import { Workflow } from "../components/Workflow";
+import { documentation, navigation, preview, previewGuide, releases, repository, sourceGuide, workflow } from "../content/cataly";
+import "../styles/global.css";
+import "../styles/landing.css";
+
+const title = "Cataly — An AI teammate for software work";
+const description = "Give Cataly the goal and constraints. It works in a tracked coding session and brings back a result you can verify.";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = await getImage({ src: closeup, width: 1200, height: 630, fit: "cover", position: "attention", format: "webp" });
+---
+
+<!doctype html>
+<html lang="en" class="dark cataly-theme" data-horon-cursor="off">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#100c12" />
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" type="image/svg+xml" href="/cataly.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={new URL(socialImage.src, Astro.site).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Illustration of Cataly with silver hair and a crimson halo" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="topbar">
+      <div class="frame topbar__inner">
+        <Brand />
+        <nav class="desktop-nav" aria-label="Primary">
+          {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+        </nav>
+        <a class="nav-github" href={repository}>
+          <GithubLogo aria-hidden="true" size={17} /> GitHub <ArrowUpRight aria-hidden="true" size={14} />
+        </a>
+        <details class="mobile-menu" data-menu>
+          <summary>Menu <Plus aria-hidden="true" size={15} /></summary>
+          <nav aria-label="Primary">
+            {navigation.map(({ href, label }) => <a href={href}>{label}</a>)}
+            <a href={repository}>GitHub <ArrowUpRight aria-hidden="true" size={15} /></a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__art" aria-hidden="true" data-hero-art>
+          <Image src={cover} alt="" widths={[480, 720, 960, 1024]} sizes="(max-width: 760px) 100vw, 65vw" format="webp" quality={86} priority />
+        </div>
+        <div class="hero__body frame">
+          <div class="hero__copy">
+            <p class="eyebrow" data-hero-entrance><span class="diamond" aria-hidden="true"></span> AI teammate for software work</p>
+            <h1 class="display hero__title" id="hero-title" data-hero-entrance>Give it <em>an outcome.</em></h1>
+            <p class="hero__description" data-hero-entrance>Tell Cataly the goal and what must stay intact. It reads the context, works in a tracked coding session, and brings back a result you can verify.</p>
+            <div class="actions" data-hero-entrance>
+              <ActionLink href="#get-started" indicator="down">Get started</ActionLink>
+              <ActionLink href={repository} tone="outline" indicator="github">View on GitHub</ActionLink>
+            </div>
+          </div>
+          <p class="hero__edition" aria-hidden="true">CATALY<span></span>FIG. 01</p>
+        </div>
+        <div class="hero__strip frame">
+          <a class="release-link" href={preview}><span class="release-dot" aria-hidden="true"></span> v0.1.2 preview <ArrowUpRight aria-hidden="true" size={13} /></a>
+          <p>Linux x64 <span aria-hidden="true">/</span> herdr <span aria-hidden="true">/</span> Discord</p>
+          <a class="chapter-jump" href="#workflow">The workflow <ArrowDown aria-hidden="true" size={14} /></a>
+        </div>
+      </section>
+
+      <section class="process section-space" id="workflow" aria-labelledby="process-title" tabindex="-1">
+        <div class="frame process__layout">
+          <div class="process__copy">
+            <p class="chapter-label"><span aria-hidden="true">01</span><span>How it works</span></p>
+            <h2 class="display section-title" id="process-title">From request <br />to <em>readback.</em></h2>
+            <p class="section-description">More than a chat reply: a request, a dedicated working session, and evidence of what’s done.</p>
+            <div class="workflow-surface">
+              <Workflow client:load steps={workflow} />
+              <ol class="workflow-fallback">
+                {workflow.map(({ title, description }) => <li><strong>{title}.</strong> {description}</li>)}
+              </ol>
+            </div>
+          </div>
+          <figure class="process__figure">
+            <div class="process__art">
+              <Image src={processArt} alt="Cataly extends a gloved hand beneath a crimson halo" widths={[480, 720, 960]} sizes="(max-width: 760px) 92vw, 37vw" format="webp" quality={84} />
+            </div>
+            <figcaption><span>Fig. 02</span><span>The Cataly portrait</span></figcaption>
+          </figure>
+        </div>
+        <div class="frame">
+          <div class="request-example">
+            <p class="eyebrow">Example request</p>
+            <blockquote>“Investigate the flaky login test. Keep the public API unchanged, run the relevant tests, and open a PR with the cause and the verification results.”</blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="start section-space" id="get-started" aria-labelledby="start-title" tabindex="-1">
+        <div class="start__art" aria-hidden="true">
+          <Image src={closeup} alt="" widths={[480, 720, 960, 1254]} sizes="(max-width: 760px) 100vw, 55vw" format="webp" quality={84} />
+        </div>
+        <div class="frame start__frame">
+          <div class="start__copy">
+            <p class="chapter-label"><span aria-hidden="true">02</span><span>Get started</span></p>
+            <h2 class="display section-title" id="start-title">Start with a <em>real task.</em></h2>
+            <p class="section-description">Choose the published preview or work from the latest source. Installation doesn’t start an agent or enable a messenger.</p>
+            <div class="setup-paths">
+              <a href={previewGuide} class="setup-link">
+                <span><strong>Try the published preview</strong><small>v0.1.2 · Linux x64, herdr, Discord</small></span>
+                <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+              <a href={sourceGuide} class="setup-link">
+                <span><strong>Work from current source</strong><small>Main branch · herdr or hc</small></span>
+                <ArrowUpRight size={18} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="frame footer__inner">
+        <div class="footer__brand"><Brand /><p>An AI teammate for software work.</p></div>
+        <nav aria-label="Footer">
+          <a href={documentation}>Documentation</a>
+          <a href={releases}>Releases</a>
+          <a href={repository}>GitHub <ArrowUpRight aria-hidden="true" size={13} /></a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      import { animate } from "motion/mini";
+
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const easing = [0.22, 1, 0.36, 1] as const;
+        document.querySelectorAll<HTMLElement>("[data-hero-entrance]").forEach((element, index) => {
+          animate(element, { opacity: [.72, 1], transform: ["translateY(12px)", "translateY(0)"] }, { duration: .66, delay: index * .07, ease: [...easing] });
+        });
+        const art = document.querySelector<HTMLElement>("[data-hero-art] img");
+        if (art) animate(art, { opacity: [.84, 1] }, { duration: .9, ease: [...easing] });
+      }
+
+      const menu = document.querySelector<HTMLDetailsElement>("[data-menu]");
+      menu?.addEventListener("click", (event) => {
+        if (event.target instanceof Element && event.target.closest("a")) menu.open = false;
+      });
+      menu?.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !menu.open) return;
+        event.preventDefault();
+        menu.open = false;
+        menu.querySelector("summary")?.focus();
+      });
+    </script>
+  </body>
+</html>

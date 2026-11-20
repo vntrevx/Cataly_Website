@@ -1,0 +1,37 @@
+{
+  "name": "cataly-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.1.9",
+    "@base-ui/react": "^1.9.0",
+    "@fontsource-variable/bodoni-moda": "^5.0.0",
+    "@horon-ai/react": "0.1.10",
+    "@horon-ai/tokens": "0.1.10",
+    "@phosphor-icons/react": "^2.1.10",
+    "astro": "^7.4.13",
+    "motion": "^12.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.7",
+    "@storybook/addon-a11y": "^10.6.8",
+    "@storybook/react-vite": "^10.6.8",
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "storybook": "^10.6.8",
+    "tailwindcss": "^4.3.5",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.8"
+  }
+}
