@@ -17,17 +17,18 @@
 }
 
 .cataly-theme {
-  --ink: #f8eef0;
-  --muted: #c0abb4;
-  --quiet: #a18b99;
+  --ink: #f6eee7;
+  --muted: #c6b5b5;
+  --quiet: #ab989e;
   --canvas: #100c12;
   --deep: #0b080e;
   --vellum: #171018;
-  --rule: #362630;
-  --stroke: #8f6374;
-  --blush: #f58ba4;
-  --rose: #b3274e;
-  --rose-hover: #c23058;
+  --rule: #3e2a31;
+  --stroke: #99716c;
+  --gilt: #d6b48f;
+  --blush: #e7a5af;
+  --rose: #732342;
+  --rose-hover: #8c3052;
   --display: "Bodoni Moda", Georgia, serif;
   --ease-reveal: cubic-bezier(.22, 1, .36, 1);
   --frame: 76rem;
@@ -66,7 +67,7 @@
   text-decoration: none;
 }
 
-.brand svg { color: var(--blush); flex: none; }
+.brand svg { color: var(--gilt); flex: none; }
 
 .actions { display: flex; align-items: center; gap: clamp(.65rem, 1.5vw, 1rem); flex-wrap: wrap; }
 
@@ -75,7 +76,7 @@
   height: auto;
   max-inline-size: 100%;
   white-space: normal;
-  border-radius: .25rem;
+  border-radius: .125rem;
   gap: .65rem;
   padding: .65rem 1rem;
   font-size: .9375rem;
@@ -86,13 +87,13 @@
 }
 
 .cataly-theme .action svg { width: 1rem; height: 1rem; flex: none; }
-.cataly-theme .action--primary { border: 1px solid transparent; background: var(--rose); color: var(--ink); }
+.cataly-theme .action--primary { border: 1px solid var(--stroke); background: var(--rose); color: var(--ink); }
 .cataly-theme .action--primary:hover { background: var(--rose-hover); }
 .cataly-theme .action--primary:active { background: var(--rose); }
 .cataly-theme .action--outline { border: 1px solid var(--stroke); background: transparent; color: var(--ink); }
 .cataly-theme .action--outline:hover { background: var(--vellum); border-color: var(--blush); }
-.cataly-theme .action--quiet { padding-inline: .25rem; color: var(--muted); }
-.cataly-theme .action--quiet:hover { color: var(--ink); text-decoration: underline; }
+.cataly-theme .action--quiet { padding-inline: .35rem; color: var(--ink); }
+.cataly-theme .action--quiet:hover { color: var(--gilt); text-decoration: underline; }
 .cataly-theme .action:focus-visible { outline: 2px solid var(--blush); outline-offset: 4px; }
 
 .workflow { border-top: 1px solid var(--rule); }
@@ -122,7 +123,7 @@
 .workflow__indicator svg { width: 1rem; height: 1rem; }
 .workflow__indicator svg:last-child, .workflow__trigger[aria-expanded="true"] svg:first-child { display: none; }
 .workflow__trigger[aria-expanded="true"] svg:last-child { display: block; }
-.workflow__panel p { max-inline-size: 42rem; margin: 0; padding: 0 1rem 1.25rem 2.85rem; color: var(--muted); }
+.workflow__panel p { max-inline-size: 42rem; margin: 0; padding: .5rem 1rem 1.25rem 2.85rem; color: var(--muted); }
 .workflow__panel[data-open] p { animation: copy-reveal .3s var(--ease-reveal) both; }
 
 @keyframes copy-reveal {
