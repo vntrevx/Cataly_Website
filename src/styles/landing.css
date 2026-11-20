@@ -82,7 +82,7 @@
 }
 .hero__art img { object-position: 50% 7%; filter: saturate(.85); }
 
-.hero__light { display: none; }
+.hero__light, .hero__touch-light { display: none; }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero__art img {
@@ -102,6 +102,18 @@
     transition: opacity .55s var(--ease-reveal), transform .85s var(--ease-reveal);
   }
   .hero[data-portrait-active] .hero__light { opacity: 1; }
+  .hero__touch-light {
+    position: absolute;
+    left: var(--touch-x, 50%);
+    top: var(--touch-y, 50%);
+    display: block;
+    inline-size: clamp(10rem, 44vw, 17rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(191 56 89 / .46), rgb(147 36 67 / .19) 40%, transparent 70%);
+    opacity: 0;
+    translate: -50% -50%;
+  }
 }
 
 .hero__art::after, .start__art::after, .process__art::after {

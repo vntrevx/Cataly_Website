@@ -34,7 +34,7 @@ A centered 76rem frame with 1.25–4.5rem responsive gutters follows native docu
 
 ## 6. Motion
 
-A short hero entrance and one-shot reveals on the workflow portrait and example quote use opacity and translation. Mouse input moves the hero portrait by up to 12px horizontally and 8px vertically and shifts a faint pool of wine-colored light. The image settles back when the pointer leaves. Neither pointer effect runs for touch or reduced motion; scroll reveals still work on touch unless reduced motion is requested. No looping animations, cursor trails, or hidden-before-JavaScript content. The example prompt has a progressive-enhancement copy control with an announced result.
+A short hero entrance and one-shot reveals on the workflow portrait and example quote use opacity and translation. Mouse input moves the hero portrait by up to 12px horizontally and 8px vertically and shifts a faint pool of wine-colored light. The image settles back when the pointer leaves. A tap on the portrait opens a small wine-colored bloom at the contact point for .82s; the artwork stays still. Panning, pinching, and activating a link do not trigger the bloom. Reduced motion leaves both pointer effects off. No looping animations, cursor trails, or hidden-before-JavaScript content. The example prompt has a progressive-enhancement copy control with an announced result.
 
 ## 7. Depth
 

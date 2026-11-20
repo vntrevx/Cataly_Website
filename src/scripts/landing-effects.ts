@@ -3,7 +3,9 @@ import { animate } from "motion/mini";
 const easing: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const hero = document.querySelector<HTMLElement>("[data-hero]");
-const portrait = hero?.querySelector<HTMLImageElement>("[data-hero-art] img");
+const art = hero?.querySelector<HTMLElement>("[data-hero-art]");
+const portrait = art?.querySelector<HTMLImageElement>("img");
+const touchLight = art?.querySelector<HTMLElement>("[data-hero-touch-light]");
 
 if (!reducedMotion.matches) {
   hero?.querySelectorAll<HTMLElement>("[data-hero-entrance]").forEach((element, index) => {
@@ -60,6 +62,57 @@ if (hero && portrait) {
   hero.addEventListener("pointercancel", reset);
   window.addEventListener("blur", reset);
   reducedMotion.addEventListener("change", reset);
+}
+
+if (hero && art && touchLight && typeof touchLight.animate === "function") {
+  let tap: { id: number; x: number; y: number } | undefined;
+  let bloom: Animation | undefined;
+
+  const resetTouch = () => {
+    tap = undefined;
+    bloom?.cancel();
+    bloom = undefined;
+  };
+
+  window.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "touch" || reducedMotion.matches) return;
+    tap = undefined;
+    const target = event.target;
+    if (!event.isPrimary || !(target instanceof Element) || !hero.contains(target) ||
+        target.closest("a, button, summary")) return;
+    const bounds = art.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX >= bounds.right ||
+        event.clientY < bounds.top || event.clientY >= bounds.bottom) return;
+    tap = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  }, { passive: true });
+
+  hero.addEventListener("pointermove", (event) => {
+    if (tap?.id === event.pointerId && Math.hypot(event.clientX - tap.x, event.clientY - tap.y) > 12) {
+      tap = undefined;
+    }
+  }, { passive: true });
+
+  hero.addEventListener("pointerup", (event) => {
+    if (tap?.id !== event.pointerId) return;
+    const { x, y } = tap;
+    tap = undefined;
+    if (reducedMotion.matches || Math.hypot(event.clientX - x, event.clientY - y) > 12) return;
+    const bounds = art.getBoundingClientRect();
+    touchLight.style.setProperty("--touch-x", `${x - bounds.left}px`);
+    touchLight.style.setProperty("--touch-y", `${y - bounds.top}px`);
+    bloom?.cancel();
+    bloom = touchLight.animate([
+      { opacity: 0, scale: .78 },
+      { opacity: .78, scale: .96, offset: .24 },
+      { opacity: 0, scale: 1.18 },
+    ], { duration: 820, easing: "ease-out" });
+  }, { passive: true });
+
+  window.addEventListener("pointercancel", (event) => {
+    if (tap?.id === event.pointerId) tap = undefined;
+  }, { passive: true });
+  window.addEventListener("blur", resetTouch);
+  reducedMotion.addEventListener("change", resetTouch);
 }
 
 const copy = document.querySelector<HTMLButtonElement>("[data-copy-example]");
